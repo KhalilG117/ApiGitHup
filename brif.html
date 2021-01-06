@@ -4,85 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
-<body>
-    <input type="text"  id="username"><button onclick="search()">Search</button>
+<body onload="load()">
+
+<nav class="navbar"style="background: black;margin-bottom: 60px">
+  <a class="navbar-brand" href="#" style="color:white;">
+    GitHub .
+  </a>
+</nav>
+
+   
 
 
+<div class="input-group md-form form-sm form-2 pl-0" style="width: 30%;margin: auto">
+  <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search" aria-label="Search" >
+  <div class="input-group-append" id="username" >
+    <span  style="background: black;color:white;cursor: pointer;"class="input-group-text red lighten-3" id="basic-text1"  onclick="search()"><i class="fas fa-search text-grey"
+        aria-hidden="true"></i></span>
+  </div>
+</div>
 
+		<h3>GitHub Profiles</h3>
 
+<div class="card-deck" style="width: 70%;margin: auto">
+  <div class="card">
+    <img class="card-img-top" src="#" id="src0" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title" id="name0">Name0</h5>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="#" id="src1"alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title" id="name1">Name1</h5>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="#" id="src2" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title" id="name2">Name2</h5>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="#" id="src3" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title" id="name3">Name3</h5>
+    </div>
+  </div>
+</div>
 
-
-    <script>
+ <script>
         
         function search(){
             var username= document.getElementById("username").value;
             console.log("https://api.github.com/users/"+username);
 
-             var jsonTable;
-
-            var obj ;
+  
 
             var table = new XMLHttpRequest;
             var DATA = "https://api.github.com/users/"+username;
 
             table.open("GET",DATA,true);
+        }
 
-          // table.onload = function(){
-          //   if (this.status == 200){
-
-          //        jsonTable = JSON.parse(this.responseText);
-          //        obj = {
-          //       login:jsonTable.login,
-          //       avatar:jsonTable.avatar_url,
-          //       repos:jsonTable.public_repos,
-          //       followers:jsonTable.followers
-          //   }
-          //       console.log(obj);
-          //   } else{
-          //       alert(this.status);
-          //   }  
-            
-          // }
-          //   table.send();
-         
-          //   var arr=[];
-
-          // for (var i = 0; i <4; i++) {
-          //   var trouve= false;
-          //        var randem = Math.floor(Math.random() * 30);
-          //       for(var j=0;j<arr.length;j++){
-          //           if (arr[j]==randem){
-          //               i--;
-          //               trouve=true;
-          //               break;
-          //           }
-          //       }
-          //       if (trouve==false){
-          //           arr[i]=randem;
-          //       }
-          // }
-
-          var arrr=[];
-          var onjj ;
+        function load() {
+        	   var arrr=[];
+          var obj ;
    fetch('https://api.github.com/users')
                  .then(res => res.json())//response type 
-                 .then(data => { console.log(data)
+                 .then(data => { 
 
-                        for(var z =0;z<4;z++){
-                         
-                                onjj={
-                                    login:data[z].login,
-                                    avatar:data[z].avatar_url
-                                }
-                           
-                         arrr.push(onjj);
+                        for(var i =0;i<4;i++){                         
+                  obj={
+                      login:data[i].login,
+                      avatar:data[i].avatar_url
+                        } 
+                  arrr.push(obj);
+                  var name = "name"+i;
+                  var image= "src"+i
+                  document.getElementById(name).innerHTML=arrr[i].login ;  
+                  document.getElementById(image).src=arrr[i].avatar ;  
+               
                      }
 
-                 }); //log the data;
-
-         console.log(arrr) ;        
+                 }); 
         }
     </script>
+   
 </body>
 </html>
