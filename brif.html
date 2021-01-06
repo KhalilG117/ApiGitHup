@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text"  id="username"><button onclick="search()">Search</button>
+
+
+
+
+
+
+    <script>
+        
+        function search(){
+            var username= document.getElementById("username").value;
+            console.log("https://api.github.com/users/"+username);
+
+             var jsonTable;
+
+            var obj ;
+
+            var table = new XMLHttpRequest;
+            var DATA = "https://api.github.com/users/"+username;
+
+            table.open("GET",DATA,true);
+
+          // table.onload = function(){
+          //   if (this.status == 200){
+
+          //        jsonTable = JSON.parse(this.responseText);
+          //        obj = {
+          //       login:jsonTable.login,
+          //       avatar:jsonTable.avatar_url,
+          //       repos:jsonTable.public_repos,
+          //       followers:jsonTable.followers
+          //   }
+          //       console.log(obj);
+          //   } else{
+          //       alert(this.status);
+          //   }  
+            
+          // }
+          //   table.send();
+         
+          //   var arr=[];
+
+          // for (var i = 0; i <4; i++) {
+          //   var trouve= false;
+          //        var randem = Math.floor(Math.random() * 30);
+          //       for(var j=0;j<arr.length;j++){
+          //           if (arr[j]==randem){
+          //               i--;
+          //               trouve=true;
+          //               break;
+          //           }
+          //       }
+          //       if (trouve==false){
+          //           arr[i]=randem;
+          //       }
+          // }
+
+          var arrr=[];
+          var onjj ;
+
+
+
+   fetch('https://api.github.com/users')
+                 .then(res => res.json())//response type 
+                 .then(data => { console.log(data)
+
+                        for(var z =0;z<4;z++){
+                         
+                                onjj={
+                                    login:data[z].login,
+                                    avatar:data[z].avatar_url
+                                }
+                           
+                         arrr.push(onjj);
+                     }
+
+                 }); //log the data;
+
+         console.log(arrr) ;
+         
+
+
+        }
+    </script>
+</body>
+</html>
