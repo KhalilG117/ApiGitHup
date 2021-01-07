@@ -56,11 +56,19 @@ box-shadow:  1px 1px 1px #b7bbbe,
     	color:white;
     	margin-left: 40px;
     }
+    body.modal-open .supreme-container{
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
 </style>
 </head>
 <body onload="load()">
 
-<nav class="navbar" id="navDark">
+<div class="supreme-container">
+	<nav class="navbar" id="navDark">
   <a class="navbar-brand" href="#" >
     GitHub .
   </a>
@@ -108,6 +116,12 @@ box-shadow:  1px 1px 1px #b7bbbe,
 </div>
 
 
+
+<footer>
+    <p class="copyright">copyright 2020/2021</p>
+</footer>
+
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -137,9 +151,6 @@ box-shadow:  1px 1px 1px #b7bbbe,
     </div>
   </div>
 </div>
-<footer>
-    <p class="copyright">copyright 2020/2021</p>
-</footer>
  <script>
         
         function search(){
