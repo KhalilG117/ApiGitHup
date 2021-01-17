@@ -10,6 +10,14 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+  if (sessionStorage.length == 0) {
+                location.replace("login.html");
+          }
+
+</script>
+
 	<style>
 		body,.card,#username,.modal-body,.modal-header{
 			background: #f0f4f7;
@@ -23,7 +31,7 @@ box-shadow:  1px 1px 1px #b7bbbe,
 		#searchForm{
 			border-radius: 10px;
 			background: black;
-			width: 30%;margin: auto
+			width: 30%;margin: auto;
 		}
     footer {
         position: relative;
@@ -72,9 +80,13 @@ box-shadow:  1px 1px 1px #b7bbbe,
   <a class="navbar-brand" href="#" >
     GitHub .
   </a>
+   <i style="cursor: pointer;float: right;color:white;" class="fas fa-sign-out-alt" onclick="logout();"></i>
 </nav>
 
-   
+  <div> 
+    <center> <label>Welcome : </label>  <b><span id="fullname"></span></b></center>  
+  </div>
+  <br clear="all">
 
 
 <div class="input-group md-form form-sm form-2 pl-0 " id="searchForm" >
@@ -123,7 +135,7 @@ box-shadow:  1px 1px 1px #b7bbbe,
 
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="background: none;border: none;">
       <div class="modal-header" style=" border-radius: 20px 20px 0 0;">
@@ -152,17 +164,25 @@ box-shadow:  1px 1px 1px #b7bbbe,
   </div>
 </div>
  <script>
-        
+
+   var prenom = sessionStorage.getItem("prenom");
+   var nom = sessionStorage.getItem("nom");
+    document.getElementById("fullname").innerHTML=prenom+" "+nom;
+
+      function logout(){
+        sessionStorage.clear();
+         location.replace("login.html");
+      }
+
+
         function search(){
             var username= document.getElementById("username").value;
-
-            console.log("https://api.github.com/users/"+username);
-
   
 
             var table = new XMLHttpRequest;
             var DATA = "https://api.github.com/users/"+username;
 
+            
             table.open("GET",DATA,true);
             var objSerch;
              table.onload = function(){
