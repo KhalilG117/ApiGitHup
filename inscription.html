@@ -198,7 +198,10 @@ function inscrit() {
      		var pass = document.getElementById('password').value;
      		var conPass = document.getElementById('confirm_password').value;
 
-     		if (pass == conPass){
+     if (prenom == "" || nom =="" || email == "" || pass =="" || conPass ==""){
+               	alert("Veuillez saisir tout les champs");
+     }else{
+     			if (pass == conPass){
      		 var users = JSON.parse(localStorage.getItem('users'));
     if(users) {
     	for (var i = 0; i< users.length; i++){
@@ -223,6 +226,7 @@ function inscrit() {
 }else{
 	alert("password and confirm that the password does not match");
 }
+     }
 
 }
 
